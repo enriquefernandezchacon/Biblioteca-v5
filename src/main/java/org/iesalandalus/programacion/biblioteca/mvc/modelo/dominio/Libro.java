@@ -1,6 +1,8 @@
 package org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio;
 
-public abstract class Libro {
+import java.io.Serializable;
+
+public abstract class Libro implements Serializable {
 
 	protected String titulo;
 	protected String autor;

@@ -1,6 +1,8 @@
 package org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio;
 
-public class Alumno {
+import java.io.Serializable;
+
+public class Alumno implements Serializable{
 
 	private static String ER_NOMBRE = "[a-zA-ZÁáÉéÍíÓóÚúÑñ]+[\\s]+[a-zA-ZÁáÉéÍíÓóÚúÑñ\\s]*";
 	private static String ER_CORREO = "\\w+[.]?\\w+[@]\\w+[.]\\w{2,5}";
