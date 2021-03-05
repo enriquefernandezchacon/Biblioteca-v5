@@ -4,8 +4,10 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -58,7 +60,17 @@ public class Libros implements ILibros {
 	}
 	
 	private void escribir() {
-		
+		File ficheroLibros = new File(NOMBRE_FICHERO_LIBROS);
+		try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficheroLibros))) {
+			for (Libro libro : coleccionLibros) {
+				salida.writeObject(libro);
+			}
+			System.out.println("Fichero de alumnos creado de forma satisfactoria.");
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: No se puede crear el fichero de alumnos.");
+		} catch (IOException e) {
+			System.out.println("ERROR: Comportamiento inesperado de entrada/salida.");
+		}
 	}
 	
 	public List<Libro> get() {

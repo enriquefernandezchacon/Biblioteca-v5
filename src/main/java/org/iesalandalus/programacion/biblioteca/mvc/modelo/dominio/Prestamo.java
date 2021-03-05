@@ -7,6 +7,7 @@ import java.time.temporal.ChronoUnit;
 
 public class Prestamo implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private static int MAX_DIAS_PRESTAMO = 20;
 	public static DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/YYYY");
 	private LocalDate fechaPrestamo;
