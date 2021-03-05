@@ -1,7 +1,5 @@
 package org.iesalandalus.programacion.biblioteca.mvc.vista.texto;
 
-import org.iesalandalus.programacion.biblioteca.mvc.vista.IVista;
-
 public enum Opcion {
 
 	INSERTAR_ALUMNO("Insertar alumno") {
