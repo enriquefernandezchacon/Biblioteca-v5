@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+   <children>
+      <AnchorPane prefHeight="399.0" prefWidth="380.0">
+         <children>
+            <ImageView fitHeight="203.0" fitWidth="192.0" layoutX="94.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/dibujoprogramacion.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="80.0" layoutY="257.0" text="MODULO DE PROGRAMACIÓN - JAVA FX" />
+            <Label layoutX="159.0" layoutY="291.0" text="BIBLIOTECA" />
+            <Label layoutX="78.0" layoutY="325.0" text="ENRIQUE OCTAVIO FERNANDEZ CHACON" />
+            <Label layoutX="178.0" layoutY="357.0" text="2021" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

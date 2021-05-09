@@ -29,9 +29,8 @@ public class Controlador implements IControlador {
 		if (vista == null) {
 			throw new IllegalArgumentException("ERROR: La vista no puede ser nula.");
 		}
-		IFuenteDatos iFuenteDatos = new FactoriaFuenteDatosFicheros();
-		this.modelo = new Modelo(iFuenteDatos);
-		this.vista = new VistaTexto();
+		this.modelo = modelo;
+		this.vista = vista;
 		this.vista.setControlador(this);
 	}
 
