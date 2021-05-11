@@ -22,9 +22,9 @@ public class Biblioteca {
 		for (String argumento : args) {
 			if (argumento.equalsIgnoreCase("-vgrafica") ) {
 				vista = FactoriaVista.IUGPESTANAS.crear();
-			}/* else if (argumento.equalsIgnoreCase("-vtexto")) {
+			} else if (argumento.equalsIgnoreCase("-vtexto")) {
 				vista = FactoriaVista.TEXTO.crear();
-			}*/
+			}
 		}
 		return vista;
 	}

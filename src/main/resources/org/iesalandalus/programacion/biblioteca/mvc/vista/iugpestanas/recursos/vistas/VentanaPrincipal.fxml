@@ -23,7 +23,9 @@
   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  OWNER OR CONTRIBUTORS BE LIABLE FOR
+  
+   ANY DIRECT, INDIRECT, INCIDENTAL,
   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
@@ -48,115 +50,82 @@
       <menus>
         <Menu mnemonicParsing="false" text="Nuevo">
           <items>
-            <MenuItem mnemonicParsing="false" text="Prestamo" />
-            <MenuItem mnemonicParsing="false" text="Libro" />
-            <MenuItem mnemonicParsing="false" text="Alumno" />
+            <MenuItem mnemonicParsing="false" onAction="#nuevoPrestamo" text="Prestamo" />
+            <MenuItem mnemonicParsing="false" onAction="#nuevoLibro" text="Libro" />
+            <MenuItem mnemonicParsing="false" onAction="#nuevoAlumno" text="Alumno" />
           </items>
         </Menu>
-            <Menu mnemonicParsing="false" text="Buscar Préstamo">
+            <Menu mnemonicParsing="false" text="Buscar">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Por Alumno" />
-                  <MenuItem mnemonicParsing="false" text="Por Libro" />
-                  <MenuItem mnemonicParsing="false" text="Por Mes" />
+                  <MenuItem mnemonicParsing="false" onAction="#buscarPrestamos" text="Prestamo" />
                </items>
             </Menu>
         <Menu mnemonicParsing="false" text="Estadisticas">
           <items>
-            <MenuItem mnemonicParsing="false" text="Por Curso" />
+            <MenuItem mnemonicParsing="false" onAction="#mostrarEstadisticas" text="Por Curso" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Ayuda">
           <items>
-            <MenuItem mnemonicParsing="false" text="Acerca De" />
+            <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca De ..." />
           </items>
         </Menu>
       </menus>
     </MenuBar>
       <TabPane prefHeight="503.0" prefWidth="751.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Prestamos">
+          <Tab text="En Prestamo">
                <content>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                      <Tab text="En Prestamo">
-                           <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label prefHeight="48.0" prefWidth="1053.0" text="PRESTAMOS EN CURSO" />
-                                    <TableView fx:id="tprestamosencurso" prefHeight="388.0" prefWidth="751.0">
-                                      <columns>
-                                        <TableColumn fx:id="tpptipolibro" prefWidth="75.0" text="Tipo de Libro" />
-                                        <TableColumn fx:id="tpptitulolibro" prefWidth="75.0" text="Titulo" />
-                                          <TableColumn fx:id="tppalumno" prefWidth="75.0" text="Alumno" />
-                                          <TableColumn fx:id="tppfechaprestamo" prefWidth="75.0" text="Fecha de Prestamo" />
-                                      </columns>
-                                    </TableView>
-                                 </children>
-                              </VBox>
-                           </content>
-                      </Tab>
-                      <Tab text="Devueltos">
-                           <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label prefHeight="48.0" prefWidth="1053.0" text="PRESTAMOS DEVUELTOS" />
-                                    <TableView fx:id="tprestamosdevueltos" prefHeight="387.0" prefWidth="751.0">
-                                       <columns>
-                                          <TableColumn fx:id="tpdtipolibro" prefWidth="75.0" text="Tipo de Libro" />
-                                          <TableColumn fx:id="tpdtitulolibro" prefWidth="75.0" text="Titulo" />
-                                          <TableColumn fx:id="tpdalumno" prefWidth="75.0" text="Alumno" />
-                                          <TableColumn fx:id="tpdfechaprestamo" prefWidth="75.0" text="Fecha de Prestamo" />
-                                          <TableColumn fx:id="tpdfechadevolucion" prefWidth="75.0" text="Fecha de Devolucion" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </VBox>
-                           </content>
-                      </Tab>
-                    </tabs>
-                  </TabPane>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label prefHeight="48.0" prefWidth="1053.0" text="PRESTAMOS EN CURSO" />
+                        <TableView fx:id="tvPrestamosEnCurso" prefHeight="388.0" prefWidth="751.0">
+                          <columns>
+                            <TableColumn fx:id="tcPCtipolibro" prefWidth="75.0" text="Tipo de Libro" />
+                            <TableColumn fx:id="tcPCtitulolibro" prefWidth="75.0" text="Titulo" />
+                              <TableColumn fx:id="tcPCalumno" prefWidth="75.0" text="Alumno" />
+                              <TableColumn fx:id="tcPCfechaprestamo" prefWidth="75.0" text="Fecha de Prestamo" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
                </content>
-            </Tab>
+          </Tab>
+          <Tab text="Devueltos">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label prefHeight="48.0" prefWidth="1053.0" text="PRESTAMOS DEVUELTOS" />
+                        <TableView fx:id="tvPrestamosDevueltos" prefHeight="387.0" prefWidth="751.0">
+                           <columns>
+                              <TableColumn fx:id="tcPDtipolibro" prefWidth="89.0" text="Tipo de Libro" />
+                              <TableColumn fx:id="tcPDtitulolibro" prefWidth="187.0" text="Titulo" />
+                              <TableColumn fx:id="tcPDalumno" minWidth="0.0" prefWidth="213.0" text="Alumno" />
+                              <TableColumn fx:id="tcPDfechaprestamo" prefWidth="127.0" text="Fecha de Prestamo" />
+                              <TableColumn fx:id="tcPDfechadevolucion" prefWidth="134.0" text="Fecha de Devolucion" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
           <Tab text="Libros">
                <content>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                      <Tab text="Libro">
-                           <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label prefHeight="48.0" prefWidth="1053.0" text="LIBROS ESCRITOS" />
-                                    <TableView fx:id="tlibrosescritos" prefHeight="387.0" prefWidth="751.0">
-                                       <columns>
-                                          <TableColumn fx:id="tlltitulo" prefWidth="75.0" text="Titulo" />
-                                          <TableColumn fx:id="tllautor" prefWidth="75.0" text="Autor" />
-                                          <TableColumn fx:id="tllnumpag" prefWidth="75.0" text="Nº de Páginas" />
-                                          <TableColumn fx:id="tllpuntos" prefWidth="75.0" text="Puntos" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </VBox>
-                           </content>
-                      </Tab>
-                      <Tab text="Audiolibro">
-                           <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label prefHeight="48.0" prefWidth="1053.0" text="AUDIOLIBROS" />
-                                    <TableView fx:id="taudiolibros" prefHeight="387.0" prefWidth="751.0">
-                                       <columns>
-                                          <TableColumn fx:id="tlatitulo" prefWidth="75.0" text="Titulo" />
-                                          <TableColumn fx:id="tlaautor" prefWidth="75.0" text="Autor" />
-                                          <TableColumn fx:id="tladuracion" prefWidth="75.0" text="Duracion" />
-                                          <TableColumn fx:id="tlapuntos" prefWidth="75.0" text="Puntos" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </VBox>
-                           </content>
-                      </Tab>
-                    </tabs>
-                  </TabPane>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label prefHeight="48.0" prefWidth="1053.0" text="LIBROS y AUDIOLIBROS" />
+                        <TableView fx:id="tvLibros" prefHeight="387.0" prefWidth="751.0">
+                           <columns>
+                              <TableColumn fx:id="tcTLtipolibro" prefWidth="75.0" text="Tipo de Libro" />
+                              <TableColumn fx:id="tcTLtitulo" prefWidth="75.0" text="Titulo" />
+                              <TableColumn fx:id="tcTLautor" prefWidth="75.0" text="Autor" />
+                              <TableColumn fx:id="tcTLpaginas" prefWidth="75.0" text="Nº de Paginas" />
+                              <TableColumn fx:id="tcTLduracion" prefWidth="75.0" text="Duracion" />
+                              <TableColumn fx:id="tcTLpuntos" prefWidth="75.0" text="Puntos" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab text="Alumnos">
@@ -164,11 +133,11 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label prefHeight="61.0" prefWidth="761.0" text="ALUMNOS" />
-                        <TableView fx:id="talumnos" prefHeight="463.0" prefWidth="751.0">
+                        <TableView fx:id="tvAlumnos" prefHeight="463.0" prefWidth="751.0">
                           <columns>
-                            <TableColumn fx:id="tanombre" prefWidth="75.0" text="Nombre" />
-                            <TableColumn fx:id="tacorreo" prefWidth="75.0" text="Correo" />
-                              <TableColumn fx:id="tacurso" prefWidth="75.0" text="Curso" />
+                            <TableColumn fx:id="tcTAnombre" prefWidth="75.0" text="Nombre" />
+                            <TableColumn fx:id="tcTAcorreo" prefWidth="75.0" text="Correo" />
+                              <TableColumn fx:id="tcTAcurso" prefWidth="75.0" text="Curso" />
                           </columns>
                         </TableView>
                      </children>
