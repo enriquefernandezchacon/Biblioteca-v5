@@ -11,6 +11,7 @@ import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.Prestamo;
 import org.iesalandalus.programacion.biblioteca.mvc.vista.iugpestanas.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.biblioteca.mvc.vista.iugpestanas.utilidades.Dialogos;
 
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,7 +59,7 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<Libro, String> tcTLautor;
     @FXML private TableColumn<Libro, String> tcTLpaginas;
     @FXML private TableColumn<Libro, String> tcTLduracion;
-    @FXML private TableColumn<Libro, String> tcTLpuntos;
+    @FXML private TableColumn<Libro, Float> tcTLpuntos;
 
 
     @FXML private TableView<Alumno> tvAlumnos;
@@ -85,18 +86,13 @@ public class ControladorVentanaPrincipal {
     	tcPDfechadevolucion.setCellValueFactory(prestamo -> new SimpleStringProperty(prestamo.getValue().getFechaDevolucion().toString()));
     	tvPrestamosDevueltos.setItems(prestamosdevueltos);
     	
-    	/*
-    	 * Falta ver como sacar el valor del tipo clase
-    	 * tcTLtipolibro.setCellValueFactory(libro -> SimpleStringProperty());
-    	 */
+    	
+    	tcTLtipolibro.setCellValueFactory(libro -> new SimpleStringProperty(libro.getClass().getSimpleName()));
     	tcTLtitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
     	tcTLautor.setCellValueFactory(new PropertyValueFactory<>("autor"));
     	tcTLpaginas.setCellValueFactory(new PropertyValueFactory<>("numPaginas"));
     	tcTLduracion.setCellValueFactory(new PropertyValueFactory<>("duracion"));
-    	/*
-    	 * Falta ver la puntuación que aporta cada libro
-    	 * tcTLpuntos.setCellValueFactory(new PropertyValueFactory<>();
-    	 */
+    	tcTLpuntos.setCellValueFactory(libro -> new SimpleFloatProperty(libro.getValue().getPuntos()).asObject());
     	tvLibros.setItems(libros);
     	
     	tcTAnombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
