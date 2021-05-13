@@ -69,6 +69,8 @@ public class ControladorVentanaPrincipal {
 
     private Stage anadirAlumno;
     private ControladorAnadirAlumno cAnadirAlumno;
+    private Stage anadirLibro;
+    private ControladorAnadirLibro cAnadirLibro;
     
     @FXML
     private void initialize() {
@@ -109,7 +111,8 @@ public class ControladorVentanaPrincipal {
     
     @FXML
     private void nuevoLibro() throws IOException {
-    	
+    	crearAnadirLibro();
+    	anadirLibro.showAndWait();
     }
     
     @FXML
@@ -182,6 +185,25 @@ public class ControladorVentanaPrincipal {
     		anadirAlumno.setScene(escenaAnadirAlumno);
     	} else {
     		cAnadirAlumno.inicializa();
+    	}
+    }
+    
+    private void crearAnadirLibro() throws IOException {
+    	if (anadirLibro == null) {
+    		anadirLibro = new Stage();
+    		FXMLLoader cargadorAnadirLibro = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/AnadirLibro.fxml"));
+    		VBox raizAnadirLibro = cargadorAnadirLibro.load();
+    		cAnadirLibro = cargadorAnadirLibro.getController();
+    		cAnadirLibro.setControladorMVC(controladorMVC);
+    		cAnadirLibro.setLibros(libros);
+    		cAnadirLibro.inicializa();
+    		
+    		Scene escenaAnadirAlumno = new Scene(raizAnadirLibro);
+    		anadirLibro.setTitle("Añadir Alumno");
+    		anadirLibro.initModality(Modality.APPLICATION_MODAL);
+    		anadirLibro.setScene(escenaAnadirAlumno);
+    	} else {
+    		cAnadirLibro.inicializa();
     	}
     }
     

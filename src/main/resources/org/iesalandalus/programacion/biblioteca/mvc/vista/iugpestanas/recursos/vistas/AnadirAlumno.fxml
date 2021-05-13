@@ -48,7 +48,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button fx:id="btAtras" mnemonicParsing="false" onAction="#atras" text="ATRAS" />
-            <Button fx:id="btAnadir" mnemonicParsing="false" onAction="#anadir" text="AÑADIR" />
+            <Button fx:id="btAnadir" mnemonicParsing="false" onAction="#anadirAlumno" text="AÑADIR" />
          </children>
       </HBox>
    </children>

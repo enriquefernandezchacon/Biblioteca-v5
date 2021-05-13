@@ -2,6 +2,8 @@ package org.iesalandalus.programacion.biblioteca.mvc.vista.iugpestanas.controlad
 
 import org.iesalandalus.programacion.biblioteca.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.Curso;
+import org.iesalandalus.programacion.biblioteca.mvc.vista.iugpestanas.utilidades.Dialogos;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 public class ControladorAnadirAlumno {
 	
@@ -35,6 +38,8 @@ public class ControladorAnadirAlumno {
 		rbSegundo.setToggleGroup(tgCurso);
 		rbTercero.setToggleGroup(tgCurso);
 		rbCuarto.setToggleGroup(tgCurso);
+		tfNombre.textProperty().addListener((ob, ov, nv) -> comprobarTexto(ER_NOMBRE, tfNombre));
+		tfCorreo.textProperty().addListener((ob, ov, nv) -> comprobarTexto(ER_CORREO, tfCorreo));
 	}
 	
 	public void setControladorMVC(IControlador controladorMVC) {
@@ -46,13 +51,22 @@ public class ControladorAnadirAlumno {
 	}
 	
 	@FXML
-	void anadir() {
-
+	void anadirAlumno() {
+		Alumno alumno = null;
+		try {
+			alumno = getAlumno();
+			controladorMVC.insertar(alumno);
+			alumnos.setAll(controladorMVC.getAlumnos());
+			Stage propietario = ((Stage) btAnadir.getScene().getWindow());
+			Dialogos.mostrarDialogoInformacion("Añadir Alumno", "Alumno añadido de forma correcta.", propietario);
+		} catch (Exception e) {
+			Dialogos.mostrarDialogoError("Añadir Alumno", e.getMessage());
+		}
 	}
 
 	@FXML
 	void atras() {
-		
+		((Stage) btAtras.getScene().getWindow()).close();
 	}
 	
 	
@@ -71,6 +85,27 @@ public class ControladorAnadirAlumno {
 		} else {
 			campo.setStyle("-fx-border-color: red");
 		}
+		if (tfNombre.getText().matches(ER_NOMBRE)&&tfCorreo.getText().matches(ER_CORREO)) {
+			btAnadir.setDisable(false);
+		} else {
+			btAnadir.setDisable(true);
+		}
+	}
+	
+	private Alumno getAlumno() {
+		String nombre = tfNombre.getText();
+		String correo = tfCorreo.getText();
+		Curso curso = null;
+		if (rbPrimero.isSelected()) {
+			curso = Curso.PRIMERO;
+		} else if (rbSegundo.isSelected()) {
+			curso = Curso.SEGUNDO;
+		} else if (rbTercero.isSelected()) {
+			curso = Curso.TERCERO;
+		} else {
+			curso = Curso.CUARTO;
+		}
+		return new Alumno(nombre, correo, curso);
 	}
 	
 }
