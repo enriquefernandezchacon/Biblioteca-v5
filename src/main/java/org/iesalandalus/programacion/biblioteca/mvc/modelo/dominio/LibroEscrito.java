@@ -33,10 +33,16 @@ public class LibroEscrito extends Libro {
 		this.numPaginas = numeroDePaginas;
 	}	
 
+	@Override
 	public float getPuntos() {
 		return (numPaginas / PAGINAS_PARA_RECOMPENSA + 1) * PUNTOS_PREMIO; 
 	}
 
+	@Override
+	public String getNombreClase() {
+		return "Libro Escrito";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,6 +81,8 @@ public class LibroEscrito extends Libro {
 	public String toString() {
 		return String.format("título=%s, autor=%s, número de páginas=%s", titulo, autor, numPaginas);
 	}
+
+	
 	
 	
 	

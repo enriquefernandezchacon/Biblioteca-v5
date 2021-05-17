@@ -9,12 +9,9 @@ import org.iesalandalus.programacion.biblioteca.mvc.vista.iugpestanas.utilidades
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class ControladorAnadirLibro {
@@ -38,9 +35,11 @@ public class ControladorAnadirLibro {
     private void initialize() {
     	rbEscrito.setToggleGroup(tgTipoLibro);
     	rbAudio.setToggleGroup(tgTipoLibro);
-    	tgTipoLibro.selectedToggleProperty().addListener((ob, ov, nv) -> comprobarBoton());
-    	tfDuracion.selectedTextProperty().addListener((ob, ov, nv) -> comprobarNumero(tfDuracion));
-    	tfNumeroPaginas.selectedTextProperty().addListener((ob, ov, nv) -> comprobarNumero(tfNumeroPaginas));
+    	tgTipoLibro.selectedToggleProperty().addListener((ob, ov, nv) -> comprobarRadioButton());
+    	tfDuracion.textProperty().addListener((ob, ov, nv) -> comprobarNumero(tfDuracion));
+    	tfNumeroPaginas.textProperty().addListener((ob, ov, nv) -> comprobarNumero(tfNumeroPaginas));
+    	tfAutor.textProperty().addListener((ob , ov, nv) -> comprobarTexto(tfAutor));
+    	tfNombre.textProperty().addListener((ob , ov, nv) -> comprobarTexto(tfNombre));
     }
     
     public void setControladorMVC(IControlador controladorMVC) {
@@ -74,15 +73,15 @@ public class ControladorAnadirLibro {
 		tfNombre.setText("");
 		tfAutor.setText("");
 		tgTipoLibro.selectToggle(rbEscrito);
-		comprobarBoton();
-		tfDuracion.setText("");
+		comprobarRadioButton();
+		tfDuracion.setText("0");
 		comprobarNumero(tfDuracion);
-		tfNumeroPaginas.setText("");
+		tfNumeroPaginas.setText("0");
 		comprobarNumero(tfNumeroPaginas);
 		
 	}
     
-    private void comprobarBoton() {
+    private void comprobarRadioButton() {
     	if (rbEscrito.isSelected()) {
     		tfDuracion.setDisable(true);
     		tfNumeroPaginas.setDisable(false);
@@ -94,12 +93,24 @@ public class ControladorAnadirLibro {
     
     private void comprobarNumero(TextField campo) {
     	try {
-    		Integer.parseInt(campo.getText());
-    		campo.setStyle("-fx-border-color: green");
-    		btAnadir.setDisable(false);
+    		int numero = Integer.parseInt(campo.getText());
+    		if(numero > 0) {
+    			campo.setStyle("-fx-border-color: green");
+    		} else {
+    			campo.setStyle("-fx-border-color: red");
+    		}
     	} catch (Exception e){
     		campo.setStyle("-fx-border-color: red");
-    		btAnadir.setDisable(true);
+    	}
+    }
+    
+    private void comprobarTexto(TextField campo) {
+    	String texto = campo.getText().trim();
+    	String vacio = "";
+    	if (texto.equals(vacio)) {
+    		campo.setStyle("-fx-border-color: red");
+    	} else {
+    		campo.setStyle("-fx-border-color: green");
     	}
     }
     

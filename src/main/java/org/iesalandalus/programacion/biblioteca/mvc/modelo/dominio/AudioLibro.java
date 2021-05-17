@@ -32,8 +32,14 @@ public class AudioLibro extends Libro {
 		this.duracion = duracion;
 	}
 	
+	@Override
 	public float getPuntos() {
 		return (duracion / MINUTOS_PARA_RECOMPENSA + 1) * PUNTOS_PREMIO;
+	}
+	
+	@Override
+	public String getNombreClase() {
+		return "Audiolibro";
 	}
 	
 	@Override

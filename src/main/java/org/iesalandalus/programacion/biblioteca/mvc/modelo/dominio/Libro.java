@@ -39,6 +39,8 @@ public abstract class Libro implements Serializable {
 
 	public abstract float getPuntos();
 	
+	public abstract String getNombreClase();
+	
 	public String getTitulo() {
 		return titulo;
 	}
