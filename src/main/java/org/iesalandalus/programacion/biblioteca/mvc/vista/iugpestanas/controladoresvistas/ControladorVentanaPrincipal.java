@@ -56,7 +56,6 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<Libro, String> tcTLduracion;
     @FXML private TableColumn<Libro, Float> tcTLpuntos;
 
-
     @FXML private TableView<Alumno> tvAlumnos;
     @FXML private TableColumn<Alumno, String> tcTAnombre;
     @FXML private TableColumn<Alumno, String> tcTAcorreo;
@@ -72,6 +71,8 @@ public class ControladorVentanaPrincipal {
     private ControladorEstadisticas cEstadisticas;
     private Stage insertarFechaDevolucion;
     private ControladorFechaDevolucion cFechaDevolucion;
+    private Stage buscarPrestamo;
+    private ControladorBuscarPor cBuscarPrestamo;
     
     @FXML
     private void initialize() {
@@ -84,7 +85,7 @@ public class ControladorVentanaPrincipal {
     	
     	tcPDtipolibro.setCellValueFactory(prestamo -> new SimpleStringProperty(prestamo.getValue().getLibro().getNombreClase()));
     	tcPDtitulolibro.setCellValueFactory(prestamo -> new SimpleStringProperty(prestamo.getValue().getLibro().getTitulo()));
-    	tcPDalumno.setCellValueFactory(prestamo -> new SimpleStringProperty(prestamo.getValue().getAlumno().getNombre()));
+    	tcPDalumno.setCellValueFactory(prestamo -> new SimpleStringProperty(prestamo.getValue().getAlumno().getCorreo()));
     	tcPDfechaprestamo.setCellValueFactory(prestamo -> new SimpleStringProperty(prestamo.getValue().getFechaPrestamo().toString()));
     	tcPDfechadevolucion.setCellValueFactory(prestamo -> new SimpleStringProperty(prestamo.getValue().getFechaDevolucion().toString()));
     	tvPrestamosDevueltos.setItems(prestamosdevueltos);
@@ -127,10 +128,11 @@ public class ControladorVentanaPrincipal {
     }
     
     @FXML
-    private void buscarPrestamos() {
-    	/*
-    	 * Abrir pestaña buscar prestamos
-    	 */
+    private void buscarPrestamos() throws IOException {
+    	crearBuscarPrestamo();
+    	buscarPrestamo.showAndWait();
+    	actualizarPrestamosEnCurso();
+    	actualizaPrestamosDevueltos();
     }
     
     @FXML
@@ -355,6 +357,30 @@ public class ControladorVentanaPrincipal {
     	} else {
     		cFechaDevolucion.setPrestamo(prestamo);
     		cFechaDevolucion.inicializa();
+    	}
+    }
+    
+    private void crearBuscarPrestamo() throws IOException {
+    	if (buscarPrestamo == null) {
+    		buscarPrestamo = new Stage();
+    		FXMLLoader cargadorBuscarPor = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/BuscarPor.fxml"));
+    		VBox raizBuscarPor = cargadorBuscarPor.load();
+    		cBuscarPrestamo = cargadorBuscarPor.getController();
+    		cBuscarPrestamo.setControladorMVC(controladorMVC);
+    		cBuscarPrestamo.setPadre(this);
+    		cBuscarPrestamo.actualizaAlumnos();
+    		cBuscarPrestamo.actualizaLibros();
+    		cBuscarPrestamo.inicializa();
+    		
+    		Scene escenaBuscaPor = new Scene(raizBuscarPor);
+    		buscarPrestamo.setTitle("Buscar Préstamo");
+    		buscarPrestamo.initModality(Modality.APPLICATION_MODAL);
+    		buscarPrestamo.setScene(escenaBuscaPor);
+    	} else {
+    		cBuscarPrestamo.actualizaAlumnos();
+    		cBuscarPrestamo.actualizaLibros();
+    		cBuscarPrestamo.inicializa();
+    		
     	}
     }
 }

@@ -69,9 +69,6 @@ public class ControladorAnadirPrestamo {
 		this.controladorMVC = controladorMVC;
 	}
     
-    public void setPrestamos(ObservableList<Prestamo> prestamos) {
-    }
-    
     public void setPadre(ControladorVentanaPrincipal padre) {
     	this.padre = padre;
     }
