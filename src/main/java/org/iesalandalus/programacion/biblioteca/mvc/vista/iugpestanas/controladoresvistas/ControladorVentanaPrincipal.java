@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.iesalandalus.programacion.biblioteca.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.AudioLibro;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.Curso;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.Libro;
+import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.LibroEscrito;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.Prestamo;
 import org.iesalandalus.programacion.biblioteca.mvc.vista.iugpestanas.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.biblioteca.mvc.vista.iugpestanas.utilidades.Dialogos;
@@ -94,8 +96,8 @@ public class ControladorVentanaPrincipal {
     	tcTLtipolibro.setCellValueFactory(libro -> new SimpleStringProperty(libro.getValue().getNombreClase()));
     	tcTLtitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
     	tcTLautor.setCellValueFactory(new PropertyValueFactory<>("autor"));
-    	tcTLpaginas.setCellValueFactory(new PropertyValueFactory<>("numPaginas"));
-    	tcTLduracion.setCellValueFactory(new PropertyValueFactory<>("duracion"));
+    	tcTLpaginas.setCellValueFactory(libro -> new SimpleStringProperty(getPaginas(libro.getValue())));
+    	tcTLduracion.setCellValueFactory(libro -> new SimpleStringProperty(getDuracion(libro.getValue())));
     	tcTLpuntos.setCellValueFactory(libro -> new SimpleFloatProperty(libro.getValue().getPuntos()).asObject());
     	tvLibros.setItems(libros);
     	
@@ -381,6 +383,22 @@ public class ControladorVentanaPrincipal {
     		cBuscarPrestamo.actualizaLibros();
     		cBuscarPrestamo.inicializa();
     		
+    	}
+    }
+    
+    private String getDuracion(Libro libro) {
+    	if (libro instanceof AudioLibro) {
+    		return String.valueOf(((AudioLibro) libro).getDuracion());
+    	} else {
+    		return "";
+    	}
+    }
+    
+    private String getPaginas(Libro libro) {
+    	if (libro instanceof LibroEscrito) {
+    		return String.valueOf(((LibroEscrito) libro).getNumPaginas());
+    	} else {
+    		return "";
     	}
     }
 }

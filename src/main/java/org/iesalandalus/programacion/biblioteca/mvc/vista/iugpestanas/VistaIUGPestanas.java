@@ -46,7 +46,7 @@ public class VistaIUGPestanas extends Application implements IVista {
 			
 			Scene escena = new Scene(raiz);
 			escenarioPrincipal.setOnCloseRequest(e -> confirmarSalida(escenarioPrincipal, e));
-			escenarioPrincipal.setTitle("Biblioteca 4");
+			escenarioPrincipal.setTitle("Biblioteca 5 - Tarea 10");
 			escenarioPrincipal.setScene(escena);
 			escenarioPrincipal.setResizable(false);
 			escenarioPrincipal.show();
